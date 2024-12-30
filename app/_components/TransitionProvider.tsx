@@ -9,13 +9,18 @@ import {useRef} from "react";
 export function TransitionProvider({children}: {children: React.ReactNode}) {
     const target = useRef<HTMLDivElement | null>(null);
     const simpleLayer = useRef<HTMLDivElement | null>(null);
+    const slideLayer = useRef<HTMLDivElement | null>(null);
     const transitionType = useRef<TransitionType>("");
 
     const leave = (next: () => void, from?: string, to?: string) => {
-        console.log("from,to", from, to);
         if (from?.includes("layer") || to?.includes("layer")) {
             transitionType.current = "layer";
             target.current = simpleLayer.current;
+        }
+
+        if (from?.includes("slide") || to?.includes("slide")) {
+            transitionType.current = "slide";
+            target.current = slideLayer.current;
         }
 
         return getTransitionFunctions(transitionType.current).leave(
@@ -56,6 +61,25 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
                 <div className="absolute inset-0 grid place-items-center">
                     <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
                         Layer Effect
+                    </h1>
+                </div>
+            </div>
+
+            {/* Slide transition */}
+            <div
+                ref={slideLayer}
+                className="fixed inset-0 z-50 -translate-x-full">
+                <div className="grid h-full w-full grid-cols-12">
+                    {[...Array(12)].map((_, i) => (
+                        <div
+                            className="bg-charleston-green column h-full w-full"
+                            key={i}></div>
+                    ))}
+                </div>
+
+                <div className="absolute inset-0 grid place-items-center">
+                    <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
+                        Slide Effect
                     </h1>
                 </div>
             </div>
