@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* To center the text vertically */
+.font-grotesk {
+    @apply pt-[0.3em] leading-[0.8];
 }

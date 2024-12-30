@@ -8,7 +8,17 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            colors: {},
+            colors: {
+                gray: "#F5F7F8",
+                yellow: "#F4CE14",
+                sage: "#495E57",
+                "outer-space": "#45474B",
+            },
+            fontFamily: {
+                roboto: ["var(--font-roboto)"],
+                magely: ["var(--font-magely)"],
+                grotesk: ["var(--font-grotesk)"],
+            },
         },
     },
     plugins: [],

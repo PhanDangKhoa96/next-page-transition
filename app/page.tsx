@@ -1,5 +1,9 @@
-import Test from "./_components/Test";
+import Hero from "./_components/Homepage/Hero";
 
 export default function Home() {
-    return <div>Hello world!</div>;
+    return (
+        <div className="mx-[2vw]">
+            <Hero />
+        </div>
+    );
 }

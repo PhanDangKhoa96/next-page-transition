@@ -27,6 +27,7 @@ bun dev
 ## Credits
 
 - Images from [Lumi AI](https://www.lummi.ai/)
+- Font from [Dafontfree](https://www.dafontfree.io/)
 
 ## Misc
 
