@@ -1,5 +1,6 @@
 "use client";
 
+import {pages} from "@/data/pages";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {Link} from "next-transition-router";
@@ -7,7 +8,11 @@ import Image from "next/image";
 import React, {useRef} from "react";
 import SplitType, {TargetElement} from "split-type";
 
-export default function HeroDetail() {
+interface PageContentType {
+    pageContent?: (typeof pages)[number];
+}
+
+export default function DetailPage({pageContent}: PageContentType) {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
@@ -64,23 +69,33 @@ export default function HeroDetail() {
     return (
         <section
             ref={sectionRef}
-            className="mx-[2vw] flex min-h-svh flex-col justify-between pb-[2vw] pt-[6vw] lg:min-h-screen">
-            <Link href="/">Back</Link>
-            <div>
+            className="mx-[2vw] flex min-h-svh flex-col items-start justify-between pb-[5vw] pt-[12vh] lg:pt-[6vh] lg:min-h-screen lg:pb-[2vw]">
+            <Link
+                href="/"
+                className="inline-flex items-center gap-x-3 font-light uppercase">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="size-10"
+                    viewBox="0 0 24 24">
+                    <path
+                        fill="currentColor"
+                        d="M5.5 8.5L2 12l3.5 3.5l.707-.707L3.914 12.5H22v-1H3.914l2.293-2.293L5.5 8.5Z"></path>
+                </svg>
+                Back to homepage
+            </Link>
+            <div className="w-full">
                 <div className="mb-[4vw]">
-                    <h1 className="page-title mb-3 overflow-hidden font-grotesk text-[5vw] uppercase leading-none opacity-0">
-                        Hello world
+                    <h1 className="page-title mb-3 overflow-hidden font-grotesk text-[8vw] uppercase leading-none opacity-0 lg:text-[5vw]">
+                        {pageContent?.title}
                     </h1>
 
-                    <div className="divider my-[1vw] h-px w-40 bg-black opacity-0"></div>
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="divider my-[2vh] lg:my-[1vw] h-px lg:w-40 w-20 bg-black opacity-0"></div>
+                    <div className="grid gap-5 lg:grid-cols-2">
                         <p className="description max-w-xl opacity-0">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Accusantium cumque delectus harum tempore
-                            tempora quo in enim! Fugit, dicta dolore.
+                            {pageContent?.description}
                         </p>
 
-                        <ul className="list text-sm font-light uppercase">
+                        <ul className="list flex justify-between text-sm font-light uppercase lg:block">
                             <li className="overflow-hidden">
                                 <span className="inline-block">Research</span>
                             </li>
@@ -99,11 +114,13 @@ export default function HeroDetail() {
                     </div>
                 </div>
 
-                <div className="relative h-[50vh] overflow-hidden">
+                <div className="relative h-[50vh] w-full overflow-hidden">
                     <Image
-                        src={"/1.jpeg"}
+                        src={pageContent?.image || "/1.jpeg"}
                         alt="Detail image"
                         fill
+                        sizes="100vw"
+                        priority
                         className="rotate-[3deg] scale-[1.2] object-cover opacity-0"
                     />
                 </div>

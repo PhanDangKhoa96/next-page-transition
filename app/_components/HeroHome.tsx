@@ -1,13 +1,12 @@
 "use client";
 
+import {pages} from "@/data/pages";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {Link} from "next-transition-router";
 import Image from "next/image";
 import {useRef} from "react";
 import SplitType, {TargetElement} from "split-type";
-
-const pages = ["layer", "slide", "pixel", "zoom"];
 
 export default function HeroHome() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -73,30 +72,32 @@ export default function HeroHome() {
     );
     return (
         <section
-            className="flex min-h-svh flex-col justify-end overflow-hidden pb-[2vw] pt-[6vw] lg:min-h-screen"
+            className="flex min-h-svh flex-col justify-end overflow-hidden pb-[8vw] pt-[6vw] lg:min-h-screen lg:pb-[2vw]"
             ref={sectionRef}>
-            <h1 className="page-title mb-[3vw] max-w-6xl overflow-hidden font-roboto text-[6vw] uppercase leading-none opacity-0">
-                A digital design studio driven by research & strategy
+            <h1 className="page-title mb-[5vw] lg:mb-[3vw] max-w-6xl overflow-hidden font-roboto text-[8vw] uppercase leading-none opacity-0 lg:text-[6vw]">
+                A creative platform built on depth, motion and precision
             </h1>
 
-            <div className="grid grid-cols-4 gap-[1vw]">
+            <div className="grid grid-cols-2 gap-[2vw] lg:grid-cols-4 lg:gap-[1vw]">
                 {pages.map((page, index) => {
-                    const imageUrl = `/${index + 1}.jpeg`;
                     return (
-                        <Link href={`/${page}`} key={index} className="group">
+                        <Link
+                            href={`/${page.slug}`}
+                            key={index}
+                            className="group">
                             <div className="relative aspect-square overflow-hidden transition-all duration-500 group-hover:rounded-[50%]">
                                 <Image
-                                    src={imageUrl}
-                                    alt={page}
+                                    src={page.image}
+                                    alt={page.slug}
                                     fill
                                     priority
                                     sizes="25vw"
                                     className="subpage-image h-0 object-cover opacity-0"
                                 />
                             </div>
-                            <div className="subpage-divider bg-charleston-green my-3 h-px w-full scale-x-0 opacity-0"></div>
-                            <div className="subpage-title font-roboto text-[1.2vw] uppercase opacity-0">
-                                {page} Effect
+                            <div className="subpage-divider my-2 h-px w-full scale-x-0 bg-charleston-green opacity-0 lg:my-3"></div>
+                            <div className="subpage-title font-roboto text-[3vw] uppercase opacity-0 lg:text-[1.2vw]">
+                                {page.slug} Effect
                             </div>
                         </Link>
                     );
