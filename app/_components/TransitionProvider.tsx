@@ -47,7 +47,7 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
                     viewBox="0 0 100 100"
                     preserveAspectRatio="none">
                     <path
-                        className="fill-[#2a2a2a]"
+                        className="fill-charleston-green"
                         vectorEffect="non-scaling-stroke"
                         d="M 0 0 V 100 Q 50 100 100 100 V 0 z"
                     />

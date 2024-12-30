@@ -9,10 +9,8 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                gray: "#F5F7F8",
-                yellow: "#F4CE14",
-                sage: "#495E57",
-                "outer-space": "#45474B",
+                "charleston-green": "#2a2a2a",
+                "pale-silver": "#CCC4B9",
             },
             fontFamily: {
                 roboto: ["var(--font-roboto)"],

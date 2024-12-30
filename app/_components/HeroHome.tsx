@@ -9,7 +9,7 @@ import SplitType, {TargetElement} from "split-type";
 
 const pages = ["layer", "slide", "pixel", "fade"];
 
-export default function Hero() {
+export default function HeroHome() {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
@@ -83,8 +83,8 @@ export default function Hero() {
                 {pages.map((page, index) => {
                     const imageUrl = `/${index + 1}.jpeg`;
                     return (
-                        <Link href={`/${page}`} key={index}>
-                            <div className="relative aspect-square overflow-hidden">
+                        <Link href={`/${page}`} key={index} className="group">
+                            <div className="relative aspect-square overflow-hidden transition-all duration-500 group-hover:rounded-[50%]">
                                 <Image
                                     src={imageUrl}
                                     alt={page}
@@ -93,7 +93,7 @@ export default function Hero() {
                                     className="subpage-image h-0 object-cover opacity-0"
                                 />
                             </div>
-                            <div className="subpage-divider my-3 h-px w-full scale-x-0 bg-[#2a2a2a] opacity-0"></div>
+                            <div className="subpage-divider bg-charleston-green my-3 h-px w-full scale-x-0 opacity-0"></div>
                             <div className="subpage-title font-roboto text-[1.2vw] uppercase opacity-0">
                                 {page} Effect
                             </div>
