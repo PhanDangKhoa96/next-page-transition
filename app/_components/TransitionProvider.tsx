@@ -10,6 +10,8 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
     const target = useRef<HTMLDivElement | null>(null);
     const simpleLayer = useRef<HTMLDivElement | null>(null);
     const slideLayer = useRef<HTMLDivElement | null>(null);
+    const pixelLayer = useRef<HTMLDivElement | null>(null);
+
     const transitionType = useRef<TransitionType>("");
 
     const leave = (next: () => void, from?: string, to?: string) => {
@@ -21,6 +23,11 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
         if (from?.includes("slide") || to?.includes("slide")) {
             transitionType.current = "slide";
             target.current = slideLayer.current;
+        }
+
+        if (from?.includes("pixel") || to?.includes("pixel")) {
+            transitionType.current = "pixel";
+            target.current = pixelLayer.current;
         }
 
         return getTransitionFunctions(transitionType.current).leave(
@@ -80,6 +87,25 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
                 <div className="absolute inset-0 grid place-items-center">
                     <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
                         Slide Effect
+                    </h1>
+                </div>
+            </div>
+
+            {/* Pixel transition */}
+            <div
+                ref={pixelLayer}
+                className="pointer-events-none fixed opacity-0 inset-0 z-50">
+                <div className="grid h-full w-full grid-cols-12 grid-rows-12">
+                    {[...Array(12 * 12)].map((_, i) => (
+                        <div
+                            className="bg-charleston-green box h-full w-full"
+                            key={i}></div>
+                    ))}
+                </div>
+
+                <div className="absolute inset-0 grid place-items-center">
+                    <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
+                        Pixel Effect
                     </h1>
                 </div>
             </div>

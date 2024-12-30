@@ -74,7 +74,7 @@ export default function HeroDetail() {
 
                     <div className="divider my-[1vw] h-px w-40 bg-black opacity-0"></div>
                     <div className="grid grid-cols-2 gap-5">
-                        <p className="description opacity-0 max-w-xl">
+                        <p className="description max-w-xl opacity-0">
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Accusantium cumque delectus harum tempore
                             tempora quo in enim! Fugit, dicta dolore.
