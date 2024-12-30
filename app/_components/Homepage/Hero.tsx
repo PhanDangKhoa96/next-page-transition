@@ -2,7 +2,7 @@
 
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
-import {Link, useTransitionState} from "next-transition-router";
+import {Link} from "next-transition-router";
 import Image from "next/image";
 import {useRef} from "react";
 import SplitType, {TargetElement} from "split-type";
@@ -11,7 +11,6 @@ const pages = ["layer", "slide", "pixel", "fade"];
 
 export default function Hero() {
     const sectionRef = useRef<HTMLDivElement>(null);
-    const {isReady} = useTransitionState();
 
     useGSAP(
         () => {
@@ -68,7 +67,7 @@ export default function Hero() {
                     "<"
                 );
 
-            isReady && tl.play();
+            tl.play();
         },
         {scope: sectionRef}
     );
@@ -81,23 +80,26 @@ export default function Hero() {
             </h1>
 
             <div className="grid grid-cols-4 gap-[1vw]">
-                {pages.map((page, index) => (
-                    <Link href={`/${page}`} key={index}>
-                        <div className="relative aspect-square overflow-hidden">
-                            <Image
-                                src={`/${index + 1}.jpeg`}
-                                alt={page}
-                                fill
-                                sizes="25vw"
-                                className="subpage-image h-0 object-cover opacity-0"
-                            />
-                        </div>
-                        <div className="subpage-divider my-3 h-px w-full scale-x-0 bg-[#2a2a2a] opacity-0"></div>
-                        <div className="subpage-title font-roboto text-[1.2vw] uppercase opacity-0">
-                            {page} Effect
-                        </div>
-                    </Link>
-                ))}
+                {pages.map((page, index) => {
+                    const imageUrl = `/${index + 1}.jpeg`;
+                    return (
+                        <Link href={`/${page}`} key={index}>
+                            <div className="relative aspect-square overflow-hidden">
+                                <Image
+                                    src={imageUrl}
+                                    alt={page}
+                                    fill
+                                    sizes="25vw"
+                                    className="subpage-image h-0 object-cover opacity-0"
+                                />
+                            </div>
+                            <div className="subpage-divider my-3 h-px w-full scale-x-0 bg-[#2a2a2a] opacity-0"></div>
+                            <div className="subpage-title font-roboto text-[1.2vw] uppercase opacity-0">
+                                {page} Effect
+                            </div>
+                        </Link>
+                    );
+                })}
             </div>
         </section>
     );

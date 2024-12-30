@@ -1,11 +1,10 @@
 "use client";
 
-import {useRef} from "react";
-import {gsap} from "gsap";
-import {TransitionRouter} from "next-transition-router";
 import getTransitionFunctions, {
     TransitionType,
 } from "@/features/page-transition";
+import {TransitionRouter} from "next-transition-router";
+import {useRef} from "react";
 
 export function TransitionProvider({children}: {children: React.ReactNode}) {
     const target = useRef<HTMLDivElement | null>(null);
