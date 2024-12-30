@@ -7,7 +7,7 @@ import Image from "next/image";
 import {useRef} from "react";
 import SplitType, {TargetElement} from "split-type";
 
-const pages = ["layer", "slide", "pixel", "fade"];
+const pages = ["layer", "slide", "pixel", "zoom"];
 
 export default function HeroHome() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -89,6 +89,7 @@ export default function HeroHome() {
                                     src={imageUrl}
                                     alt={page}
                                     fill
+                                    priority
                                     sizes="25vw"
                                     className="subpage-image h-0 object-cover opacity-0"
                                 />

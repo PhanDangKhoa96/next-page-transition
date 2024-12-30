@@ -82,7 +82,10 @@ export const pixelEnter = (
 
         gsap.timeline({
             defaults: {ease: "power1.inOut", duration: 0.7},
-            onComplete: next,
+            onComplete: () => {
+                gsap.set(element, {pointerEvents: "none"});
+                next();
+            },
         })
             .fromTo(
                 pageTitleSplit.words,
@@ -112,7 +115,6 @@ export const pixelEnter = (
             )
             .to(element, {
                 opacity: 0,
-                pointerEvents: "none",
             });
     }, element);
 

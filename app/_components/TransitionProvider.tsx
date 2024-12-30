@@ -11,6 +11,7 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
     const simpleLayer = useRef<HTMLDivElement | null>(null);
     const slideLayer = useRef<HTMLDivElement | null>(null);
     const pixelLayer = useRef<HTMLDivElement | null>(null);
+    const zoomLayer = useRef<HTMLDivElement | null>(null);
 
     const transitionType = useRef<TransitionType>("");
 
@@ -28,6 +29,11 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
         if (from?.includes("pixel") || to?.includes("pixel")) {
             transitionType.current = "pixel";
             target.current = pixelLayer.current;
+        }
+
+        if (from?.includes("zoom") || to?.includes("zoom")) {
+            transitionType.current = "zoom";
+            target.current = zoomLayer.current;
         }
 
         return getTransitionFunctions(transitionType.current).leave(
@@ -75,12 +81,13 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
             {/* Slide transition */}
             <div
                 ref={slideLayer}
-                className="fixed inset-0 z-50 -translate-x-full">
+                className="fixed inset-0 z-50 overflow-hidden opacity-0 pointer-events-none">
                 <div className="grid h-full w-full grid-cols-12">
                     {[...Array(12)].map((_, i) => (
-                        <div
-                            className="bg-charleston-green column h-full w-full"
-                            key={i}></div>
+                        <div className="relative h-full w-full" key={i}>
+                            {/* 101% to remove anti aliasing */}
+                            <div className="bg-charleston-green w-[101%)] column absolute inset-0"></div>
+                        </div>
                     ))}
                 </div>
 
@@ -94,7 +101,7 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
             {/* Pixel transition */}
             <div
                 ref={pixelLayer}
-                className="pointer-events-none fixed opacity-0 inset-0 z-50">
+                className="pointer-events-none fixed inset-0 z-50 opacity-0">
                 <div className="grid h-full w-full grid-cols-12 grid-rows-12">
                     {[...Array(12 * 12)].map((_, i) => (
                         <div
@@ -106,6 +113,17 @@ export function TransitionProvider({children}: {children: React.ReactNode}) {
                 <div className="absolute inset-0 grid place-items-center">
                     <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
                         Pixel Effect
+                    </h1>
+                </div>
+            </div>
+
+            {/* Layer transition */}
+            <div
+                ref={zoomLayer}
+                className="bg-charleston-green fixed inset-0 z-50 translate-y-full">
+                <div className="absolute inset-0 grid place-items-center">
+                    <h1 className="page-title overflow-hidden font-roboto text-[5vw] uppercase text-white">
+                        Zoom Effect
                     </h1>
                 </div>
             </div>

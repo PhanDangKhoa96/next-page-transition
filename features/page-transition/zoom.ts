@@ -11,47 +11,47 @@ const getPageTitle = (element: HTMLDivElement) => {
     return pageTitleSplit;
 };
 
-const getColumns = (element: HTMLDivElement) => {
-    const columns = element.querySelectorAll(".column")!;
+const getMainTag = () => {
+    const main = document.querySelector("main");
 
-    return columns;
+    return main;
 };
 
-export const slideLeave = (
-    next: () => void,
-    element: HTMLDivElement | null
-) => {
+export const zoomLeave = (next: () => void, element: HTMLDivElement | null) => {
     if (!element) {
         return;
     }
 
     const ctx = gsap.context(() => {
-        const columns = getColumns(element);
         const pageTitleSplit = getPageTitle(element);
+        const main = getMainTag();
 
         gsap.set(pageTitleSplit.words, {opacity: 1});
-        gsap.set(element, {opacity: 1, pointerEvents: "auto"});
 
         gsap.timeline({
             onComplete: next,
-            defaults: {ease: "power1.inOut", duration: 0.7},
+            defaults: {ease: "power1.inOut", duration: 0.5},
         })
             .fromTo(
-                columns,
+                main,
                 {
-                    scaleX: 0,
-                    transformOrigin: "left",
+                    scale: 1,
+                    backgroundColor: "white",
+                    filter: "brightness(1)",
                 },
-                {
-                    scaleX: 1,
-                    stagger: 0.05,
-                },
-                "<0.25"
+                {scale: 0.9, filter: "brightness(0.7)"}
             )
-
+            .fromTo(
+                element,
+                {y: "100%"},
+                {
+                    y: 0,
+                },
+                "<50%"
+            )
             .fromTo(
                 pageTitleSplit.words,
-                {yPercent: 150},
+                {yPercent: -100},
                 {yPercent: 0, stagger: 0.1}
             );
     }, element);
@@ -61,46 +61,46 @@ export const slideLeave = (
     };
 };
 
-export const slideEnter = (
-    next: () => void,
-    element: HTMLDivElement | null
-) => {
+export const zoomEnter = (next: () => void, element: HTMLDivElement | null) => {
     if (!element) {
         return;
     }
 
     const ctx = gsap.context(() => {
-        const columns = getColumns(element);
         const pageTitleSplit = getPageTitle(element);
-        gsap.set(element, {opacity: 1, pointerEvents: "auto"});
+        const main = getMainTag();
 
         gsap.timeline({
-            defaults: {ease: "power1.inOut", duration: 0.7},
-            onComplete: () => {
-                gsap.set(element, {pointerEvents: "none"});
-                next();
-            },
+            defaults: {ease: "power1.inOut", duration: 0.5},
+            onComplete: next,
         })
             .fromTo(
                 pageTitleSplit.words,
                 {yPercent: 0},
                 {
-                    yPercent: -100,
-                    duration: 0.8,
+                    yPercent: 150,
+                    duration: 1,
                     stagger: 0.1,
                     ease: "power2.inOut",
                 }
             )
             .fromTo(
-                columns,
-                {scaleX: 1},
+                element,
+                {y: 0},
                 {
-                    scaleX: 0,
-                    stagger: 0.05,
-                    transformOrigin: "right",
+                    y: "100%",
                 }
             )
-            .fromTo(element, {opacity: 1}, {opacity: 0});
+            .fromTo(
+                main,
+                {
+                    scale: 0.9,
+                    backgroundColor: "white",
+                    filter: "brightness(0.7)",
+                },
+                {scale: 1, filter: "brightness(1)"},
+                "<50%"
+            );
     }, element);
 
     return () => {
