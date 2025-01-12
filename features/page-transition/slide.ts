@@ -43,7 +43,7 @@ export const slideLeave = (
                     transformOrigin: "left",
                 },
                 {
-                    scaleX: 1,
+                    scaleX: 1.1,
                     stagger: 0.05,
                 },
                 "<0.25"
@@ -93,7 +93,7 @@ export const slideEnter = (
             )
             .fromTo(
                 columns,
-                {scaleX: 1},
+                {scaleX: 1.1},
                 {
                     scaleX: 0,
                     stagger: 0.05,
