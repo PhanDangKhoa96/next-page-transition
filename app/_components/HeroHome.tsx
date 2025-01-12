@@ -72,9 +72,9 @@ export default function HeroHome() {
     );
     return (
         <section
-            className="flex min-h-svh flex-col justify-end overflow-hidden pb-[8vw] pt-[6vh] lg:min-h-screen lg:pb-[2vw]"
+            className="flex flex-col justify-end gap-y-12 overflow-hidden pb-[8vw] lg:gap-y-20 lg:pb-[2vw]"
             ref={sectionRef}>
-            <h1 className="page-title mb-[5vw] lg:mb-[3vw] max-w-6xl overflow-hidden font-roboto text-[8vw] uppercase leading-none opacity-0 lg:text-[6vw]">
+            <h1 className="page-title mb-[5vw] max-w-6xl overflow-hidden font-roboto text-[clamp(6vw,8vw,80px)] uppercase leading-none opacity-0 lg:mb-[3vw]">
                 A creative platform built on depth, motion and precision
             </h1>
 

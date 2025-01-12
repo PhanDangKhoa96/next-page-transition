@@ -69,7 +69,7 @@ export default function DetailPage({pageContent}: PageContentType) {
     return (
         <section
             ref={sectionRef}
-            className="mx-[2vw] flex min-h-svh flex-col items-start justify-between pb-[5vw] pt-[12vh] lg:pt-[6vh] lg:min-h-screen lg:pb-[2vw]">
+            className="mx-[2vw] flex flex-col items-start justify-between gap-y-12 pb-[5vw] lg:gap-y-20 lg:pb-[2vw]">
             <Link
                 href="/"
                 className="inline-flex items-center gap-x-3 font-light uppercase">
@@ -89,7 +89,7 @@ export default function DetailPage({pageContent}: PageContentType) {
                         {pageContent?.title}
                     </h1>
 
-                    <div className="divider my-[2vh] lg:my-[1vw] h-px lg:w-40 w-20 bg-black opacity-0"></div>
+                    <div className="divider my-[2vh] h-px w-20 bg-black opacity-0 lg:my-[1vw] lg:w-40"></div>
                     <div className="grid gap-5 lg:grid-cols-2">
                         <p className="description max-w-xl opacity-0">
                             {pageContent?.description}
