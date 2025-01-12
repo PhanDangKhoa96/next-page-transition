@@ -27,7 +27,7 @@ export default function RootLayout({
             <body className={`antialiased`}>
                 <TransitionProvider>
                     <LenisProvider>
-                        <div className="flex min-h-svh flex-col gap-y-12 lg:min-h-screen lg:gap-y-20">
+                        <div className="flex min-h-svh justify-between flex-col gap-y-12 lg:min-h-screen lg:gap-y-20">
                             <Header />
                             {children}
                         </div>
