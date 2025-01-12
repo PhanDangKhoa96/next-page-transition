@@ -4,6 +4,7 @@ import {LenisProvider} from "./_components/LenisProvider";
 import {GsapProvider} from "./_components/GsapProvider";
 import {TransitionProvider} from "./_components/TransitionProvider";
 import {Roboto} from "next/font/google";
+import Header from "./_components/Header";
 
 export const metadata: Metadata = {
     title: "Khoa Phan Playground",
@@ -25,7 +26,10 @@ export default function RootLayout({
         <html lang="en" className={`${roboto.variable}`}>
             <body className={`antialiased`}>
                 <TransitionProvider>
-                    <LenisProvider>{children}</LenisProvider>
+                    <LenisProvider>
+                        <Header />
+                        {children}
+                    </LenisProvider>
                     <GsapProvider scrollTrigger />
                 </TransitionProvider>
             </body>
